@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ContactsWebApi</name>
+    </assembly>
+    <members>
+        <member name="M:ContactsWebApi.Controllers.ContactController.List">
+            <summary>
+            Lists all Contacts
+            </summary>
+            <returns>List of contacts</returns>
+        </member>
+        <member name="M:ContactsWebApi.Controllers.ContactController.Get(System.Int32)">
+            <summary>
+            Find Contact by Id
+            </summary>
+            <param name="id">Id of Contact</param>
+            <returns>Contact object or empty</returns>
+        </member>
+    </members>
+</doc>
