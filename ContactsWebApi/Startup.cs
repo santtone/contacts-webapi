@@ -24,6 +24,7 @@ namespace ContactsWebApi
         {
             //Services
             services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             //Repositories
             services.AddScoped<IContactRepository, ContactRepository>();

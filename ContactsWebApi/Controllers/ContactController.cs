@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ContactsWebApi.Models;
 using ContactsWebApi.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ContactsWebApi.Controllers
 {
     [Route("api/contacts")]
+    [ApiController]
     public class ContactController : ControllerBase
     {
         private readonly IContactService _contactService;
@@ -44,11 +44,6 @@ namespace ContactsWebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Contact contact)
         {
-            if (!ModelState.IsValid)
-            {
-                return new BadRequestObjectResult(ModelState);
-            }
-
             var created = await _contactService.Create(contact);
             return new JsonResult(created);
         }
