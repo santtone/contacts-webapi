@@ -1,4 +1,8 @@
-﻿using ContactsWebApi.Config;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using ContactsWebApi.Config;
 using ContactsWebApi.Repositories;
 using ContactsWebApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -8,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace ContactsWebApi
 {
@@ -45,6 +50,14 @@ namespace ContactsWebApi
                                         Configuration["Azure:AD:TenantId"];
                 });
 
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Info {Title = "Contacts Web API", Version = "v1"});
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -63,6 +76,14 @@ namespace ContactsWebApi
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
+
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contacts Web API V1"); });
+
             //InitializeDatabase(app);
             app.UseMvc();
         }

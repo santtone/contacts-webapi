@@ -19,14 +19,32 @@ namespace ContactsWebApi.Controllers
             _contactService = contactService;
         }
 
+        /// <summary>
+        /// Lists all Contacts
+        /// </summary>
+        /// <returns>List of Contact Objects</returns>
+        /// <response code="200">Returns List of Contact Objects</response>
         [HttpGet]
+        [Produces("application/json")]
+        [ProducesResponseType(200)]
         public async Task<IActionResult> List()
         {
             var contacts = await _contactService.Get();
             return new JsonResult(contacts);
         }
 
+
+        /// <summary>
+        /// Finds Contact By Id
+        /// </summary>
+        /// <param name="id">Id of the Contact</param>
+        /// <returns>Specified Contact object</returns>
+        /// <response code="200">Returns Specified Contact object</response>
+        /// <response code="404">Returned if specified contact by id not found</response>
         [HttpGet("{id}")]
+        [Produces("application/json")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
         public async Task<IActionResult> Get(int id)
         {
             var contact = await _contactService.Get(id);
