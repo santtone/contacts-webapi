@@ -52,7 +52,7 @@ namespace ContactsWebApi.Controllers
             {
                 return new NotFoundResult();
             }
-
+            
             return new JsonResult(contact);
         }
 
