@@ -1,3 +1,5 @@
 /.vs
 /ContactsWebApi/obj
 /ContactsWebApi/bin
+/ContactsWebApiTest/obj
+/ContactsWebApiTest/bin

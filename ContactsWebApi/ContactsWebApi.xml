@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ContactsWebApi</name>
+    </assembly>
+    <members>
+        <member name="M:ContactsWebApi.Controllers.ContactController.List">
+            <summary>
+            Lists all Contacts
+            </summary>
+            <returns>List of Contact Objects</returns>
+            <response code="200">Returns List of Contact Objects</response>
+        </member>
+        <member name="M:ContactsWebApi.Controllers.ContactController.Get(System.Int32)">
+            <summary>
+            Finds Contact By Id
+            </summary>
+            <param name="id">Id of the Contact</param>
+            <returns>Specified Contact object</returns>
+            <response code="200">Returns Specified Contact object</response>
+            <response code="404">Returned if specified contact by id not found</response>
+        </member>
+    </members>
+</doc>
