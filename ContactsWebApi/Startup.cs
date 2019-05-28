@@ -1,6 +1,7 @@
 ﻿using ContactsWebApi.Config;
 using ContactsWebApi.Repositories;
 using ContactsWebApi.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -29,9 +30,21 @@ namespace ContactsWebApi
             //Repositories
             services.AddScoped<IContactRepository, ContactRepository>();
 
-
             services.AddDbContext<ContactsDbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionString"]));
+
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options =>
+                {
+                    options.Audience = Configuration["Azure:AD:ClientId"];
+                    options.Authority = Configuration["Azure:AD:Instance"] +
+                                        Configuration["Azure:AD:TenantId"];
+                });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -49,6 +62,7 @@ namespace ContactsWebApi
             }
 
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             //InitializeDatabase(app);
             app.UseMvc();
         }

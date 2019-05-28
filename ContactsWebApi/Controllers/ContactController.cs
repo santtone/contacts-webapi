@@ -1,12 +1,15 @@
 ﻿using System.Threading.Tasks;
 using ContactsWebApi.Models;
 using ContactsWebApi.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContactsWebApi.Controllers
 {
     [Route("api/contacts")]
     [ApiController]
+    [Authorize]
     public class ContactController : ControllerBase
     {
         private readonly IContactService _contactService;
