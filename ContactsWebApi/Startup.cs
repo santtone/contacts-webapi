@@ -50,13 +50,7 @@ namespace ContactsWebApi
                                         Configuration["Azure:AD:TenantId"];
                 });
 
-            services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1", new Info {Title = "Contacts Web API", Version = "v1"});
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                options.IncludeXmlComments(xmlPath);
-            });
+            services.AddZSwagger();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -79,10 +73,7 @@ namespace ContactsWebApi
 
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-
-            // specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contacts Web API V1"); });
+            app.UseZSwagger();
 
             //InitializeDatabase(app);
             app.UseMvc();

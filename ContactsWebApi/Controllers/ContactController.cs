@@ -35,8 +35,11 @@ namespace ContactsWebApi.Controllers
 
 
         /// <summary>
-        /// Finds Contact By Id
+        /// Finds Feature By Id
         /// </summary>
+        /// <remarks>
+        /// Here is a sample remarks placeholder.
+        /// </remarks>
         /// <param name="id">Id of the Contact</param>
         /// <returns>Specified Contact object</returns>
         /// <response code="200">Returns Specified Contact object</response>
